@@ -1,4 +1,4 @@
-# cognitor-python
+# cognitor
 
 Python SDK for [Cognitor](https://github.com/tanaos/cognitor).
 

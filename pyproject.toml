@@ -1,5 +1,5 @@
 [project]
-name = "cognitor-python"
+name = "cognitor"
 version = "0.1.0"
 description = "Python client for the Cognitor vector store API"
 requires-python = ">=3.12"
