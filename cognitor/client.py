@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from typing import Literal
 from typing import Any, Optional
 
 import httpx
@@ -85,6 +86,15 @@ class Cognitor:
         response = self._http.get("/")
         self._raise_for_status(response)
         return response.json()
+
+    def health_ready(self) -> Literal["ready", "loading"]:
+        response = self._http.get("/health/ready")
+        if response.status_code == 200:
+            return "ready"
+        if response.status_code == 503:
+            return "loading"
+        self._raise_for_status(response)
+        return "loading"
 
     # ------------------------------------------------------------------
     # Collections

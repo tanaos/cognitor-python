@@ -15,6 +15,7 @@ from cognitor import Cognitor
 
 with Cognitor("http://localhost:7530", api_key="your-api-key") as client:
     print(client.ping())
+    print(client.health_ready())  # "ready" or "loading"
 ```
 
 The `api_key` parameter is optional — omit it if your server does not require authentication.
@@ -112,6 +113,17 @@ for hit in response.results:
 # Compact a collection (removes deleted vectors)
 result = client.compact("my-collection")
 print(result.deleted_count, "vectors removed")
+```
+
+### Health
+
+```python
+# Readiness probe status
+status = client.health_ready()
+if status == "ready":
+    print("Server is ready")
+else:
+    print("Server is still loading models")
 ```
 
 ## Error handling
