@@ -13,7 +13,7 @@ pip install cognitor
 ```python
 from cognitor import Cognitor
 
-with Cognitor("http://localhost:8000", api_key="your-api-key") as client:
+with Cognitor("http://localhost:7530", api_key="your-api-key") as client:
     print(client.ping())
 ```
 
@@ -142,14 +142,14 @@ except AuthenticationError as e:
 Use the client as a context manager (recommended) to ensure the underlying HTTP connection is closed:
 
 ```python
-with Cognitor("http://localhost:8000") as client:
+with Cognitor("http://localhost:7530") as client:
     ...
 ```
 
 Or close it manually:
 
 ```python
-client = Cognitor("http://localhost:8000")
+client = Cognitor("http://localhost:7530")
 try:
     ...
 finally:
