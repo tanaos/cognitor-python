@@ -65,6 +65,9 @@ class SearchResult:
     text: str
     metadata: Metadata
     vector: Optional[Vector]
+    answer_passage: Optional[str] = None
+    answer_passage_start: Optional[int] = None
+    answer_passage_end: Optional[int] = None
 
     @classmethod
     def from_dict(cls, d: dict[str, Any]) -> SearchResult:
@@ -74,6 +77,9 @@ class SearchResult:
             text=d["text"],
             metadata=d["metadata"],
             vector=d.get("vector"),
+            answer_passage=d.get("answer_passage"),
+            answer_passage_start=d.get("answer_passage_start"),
+            answer_passage_end=d.get("answer_passage_end"),
         )
 
 
