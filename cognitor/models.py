@@ -59,27 +59,39 @@ class ListDocumentsResult:
 
 
 @dataclass
+class AnswerPassage:
+    passage: str
+    start: int
+    end: int
+
+    @classmethod
+    def from_dict(cls, d: dict[str, Any]) -> AnswerPassage:
+        return cls(
+            passage=d["passage"],
+            start=d["start"],
+            end=d["end"],
+        )
+
+
+@dataclass
 class SearchResult:
     id: str
     score: float
     text: str
     metadata: Metadata
     vector: Optional[Vector]
-    answer_passage: Optional[str] = None
-    answer_passage_start: Optional[int] = None
-    answer_passage_end: Optional[int] = None
+    answer: Optional[AnswerPassage] = None
 
     @classmethod
     def from_dict(cls, d: dict[str, Any]) -> SearchResult:
+        raw_answer = d.get("answer")
         return cls(
             id=d["id"],
             score=d["score"],
             text=d["text"],
             metadata=d["metadata"],
             vector=d.get("vector"),
-            answer_passage=d.get("answer_passage"),
-            answer_passage_start=d.get("answer_passage_start"),
-            answer_passage_end=d.get("answer_passage_end"),
+            answer=AnswerPassage.from_dict(raw_answer) if raw_answer is not None else None,
         )
 
 

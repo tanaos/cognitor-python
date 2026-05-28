@@ -8,6 +8,7 @@ from .exceptions import (
     ValidationError,
 )
 from .models import (
+    AnswerPassage,
     Collection,
     CompactionResult,
     Document,
@@ -19,6 +20,7 @@ from .models import (
 )
 
 __all__ = [
+    "AnswerPassage",
     "Cognitor",
     "Collection",
     "Document",
