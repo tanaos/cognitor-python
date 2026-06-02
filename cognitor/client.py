@@ -212,11 +212,17 @@ class Cognitor:
         *,
         query_text: Optional[str] = None,
         query_vector: Optional[Vector] = None,
-        top_k: int = 10,
+        top_k: int = 5,
         filters: Optional[Metadata] = None,
         include_vectors: bool = False,
+        perform_extractive_qa: bool = True,
+        perform_reranking: bool = True
     ) -> SearchResponse:
-        body: dict[str, Any] = {"top_k": top_k, "include_vectors": include_vectors}
+        body: dict[str, Any] = {
+            "top_k": top_k, "include_vectors": include_vectors,
+            "perform_extractive_qa": perform_extractive_qa,
+            "perform_reranking": perform_reranking
+        }
         if query_text is not None:
             body["query_text"] = query_text
         if query_vector is not None:
