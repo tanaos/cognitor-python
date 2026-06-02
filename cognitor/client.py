@@ -38,7 +38,7 @@ class Cognitor:
     ) -> None:
         headers: dict[str, str] = {}
         if api_key:
-            headers["Authorization"] = f"Bearer {api_key}"
+            headers["X-API-Key"] = api_key
         self._http = httpx.Client(
             base_url=base_url.rstrip("/"),
             headers=headers,
