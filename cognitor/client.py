@@ -235,3 +235,19 @@ class Cognitor:
         response = self._http.post(f"/admin/collections/{collection}/compact")
         self._raise_for_status(response)
         return CompactionResult.from_dict(response.json())
+
+    # ------------------------------------------------------------------
+    # Authentication
+    # ------------------------------------------------------------------
+    
+    def register(self, username: str, password: str) -> str:
+        body = {"username": username, "password": password}
+        response = self._http.post("/auth/register", json=body)
+        self._raise_for_status(response)
+        return response.json()["api_key"]
+    
+    def login(self, username: str, password: str) -> str:
+        body = {"username": username, "password": password}
+        response = self._http.post("/auth/login", json=body)
+        self._raise_for_status(response)
+        return response.json()["api_key"]
