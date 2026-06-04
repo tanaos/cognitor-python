@@ -1,4 +1,4 @@
-# cognitor
+# cognitor-python
 
 Python SDK for [Cognitor](https://github.com/tanaos/cognitor).
 
@@ -18,7 +18,7 @@ with Cognitor("http://localhost:7530", api_key="your-api-key") as client:
     print(client.health_ready())  # "ready" or "loading"
 ```
 
-The `api_key` parameter is optional — omit it if your server does not require authentication.
+The `api_key` parameter is optional, omit it if your [cognitor instance](https://github.com/tanaos/cognitor) does not require authentication.
 
 ## Usage
 
@@ -124,29 +124,6 @@ if status == "ready":
     print("Server is ready")
 else:
     print("Server is still loading models")
-```
-
-## Error handling
-
-All errors are subclasses of `CognitorError`.
-
-| Exception | HTTP status |
-|---|---|
-| `AuthenticationError` | 401 |
-| `NotFoundError` | 404 |
-| `ConflictError` | 409 |
-| `ValidationError` | 400 / 422 |
-| `ServerError` | 5xx |
-
-```python
-from cognitor_client import Cognitor, NotFoundError, AuthenticationError
-
-try:
-    collection = client.get_collection("nonexistent")
-except NotFoundError as e:
-    print("not found:", e)
-except AuthenticationError as e:
-    print("unauthorized:", e)
 ```
 
 ## Connection management
