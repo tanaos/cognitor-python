@@ -257,3 +257,66 @@ class Cognitor:
         response = self._http.post("/auth/login", json=body)
         self._raise_for_status(response)
         return response.json()["api_key"]
+
+    # ------------------------------------------------------------------
+    # Worker
+    # ------------------------------------------------------------------
+
+    def set_worker_folder(self, folder_path: str) -> dict[str, Any]:
+        """
+        Configure the folder path that the cognitor-worker will monitor and index.
+        
+        Args:
+            folder_path: Absolute path to the folder to index
+            
+        Returns:
+            Response with message and configured folder_path
+        """
+        body = {"folder_path": folder_path}
+        response = self._http.post("/worker/folder", json=body)
+        self._raise_for_status(response)
+        return response.json()
+
+    def get_worker_folder(self) -> dict[str, Any]:
+        """
+        Retrieve the currently configured folder path for the cognitor-worker.
+        
+        Returns:
+            Response with folder_path (str or null) and configured (bool)
+        """
+        response = self._http.get("/worker/folder")
+        self._raise_for_status(response)
+        return response.json()
+
+    def clear_worker_folder(self) -> dict[str, Any]:
+        """
+        Clear the worker folder configuration.
+        
+        Returns:
+            Response with confirmation message
+        """
+        response = self._http.delete("/worker/folder")
+        self._raise_for_status(response)
+        return response.json()
+
+    def trigger_reindex(self) -> dict[str, Any]:
+        """
+        Trigger an immediate reindex of documents from the configured folder.
+        
+        Returns:
+            Response with confirmation message
+        """
+        response = self._http.post("/worker/reindex")
+        self._raise_for_status(response)
+        return response.json()
+
+    def get_indexing_status(self) -> dict[str, Any]:
+        """
+        Get the current indexing status of the worker.
+        
+        Returns:
+            Response with indexing (bool) status and optional error (str or null)
+        """
+        response = self._http.get("/worker/indexing-status")
+        self._raise_for_status(response)
+        return response.json()
